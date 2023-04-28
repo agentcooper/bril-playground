@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bril Playground</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="header">
+        <h2>
+          <a href="https://capra.cs.cornell.edu/bril/">Bril</a> Playground
+        </h2>
+        <fieldset id="settings">
+          <span>
+            <label
+              >Source
+              <select id="source-select">
+                <option>condition.bril</option>
+                <option>for-loop.bril</option>
+                <option>while.bril</option>
+                <option>factorial.bril</option>
+              </select>
+            </label>
+          </span>
+
+          <span
+            ><button style="margin-left: 2em" id="run-button">Run code</button>
+            <input
+              style="margin-left: 0.5em; width: 8em"
+              type="text"
+              value=""
+              id="run-arguments-input"
+              placeholder="Arguments"
+            />
+            <small style="margin-left: 0.5em; color: #6c6c6c"
+              >(output goes to JS console)</small
+            >
+          </span>
+
+          <span style="flex-grow: 1"></span>
+
+          <span>
+            <label>
+              CFG function
+              <input
+                style="width: 8em"
+                type="text"
+                value=""
+                id="cfg-function-name"
+                placeholder="main"
+              />
+            </label>
+          </span>
+
+          <span style="margin-left: 2em">
+            <label for="ssa-checkbox" style="margin-left: 0.3em">
+              <input
+                type="checkbox"
+                id="ssa-checkbox"
+                style="vertical-align: middle"
+              />
+              <span style="vertical-align: middle">Show SSA form</span>
+            </label>
+          </span>
+
+          <span style="margin-left: 2em">
+            <label for="on-hover-select">On node hover </label>
+            <select id="on-hover-select">
+              <option value="dominators">Show dominators</option>
+              <option value="frontiers">Show dominance frontier</option>
+            </select>
+          </span>
+        </fieldset>
+      </div>
+
+      <div id="main">
+        <div id="editor"></div>
+        <div id="graph"></div>
+      </div>
+    </div>
+    <script defer type="module" src="./src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+start: (struct | func)*
+
+struct: STRUCT IDENT "=" "{" mbr* "}"
+mbr: IDENT ":" type ";"
+
+func: FUNC ["(" arg_list? ")"] [tyann] "{" instr* "}"
+arg_list: | arg ("," arg)*
+arg: IDENT ":" type
+?instr: const | vop | eop | label
+
+const.4: IDENT [tyann] "=" "const" lit ";"
+vop.3: IDENT [tyann] "=" op ";"
+eop.2: op ";"
+label.1: LABEL ":"
+
+op: IDENT (FUNC | LABEL | IDENT)*
+
+?tyann: ":" type
+
+lit: SIGNED_INT  -> int
+  | BOOL         -> bool
+  | SIGNED_FLOAT -> float
+  | "nullptr"    -> nullptr
+
+type: IDENT "<" type ">"  -> paramtype
+    | IDENT               -> primtype
+
+BOOL: "true" | "false"
+STRUCT: "struct"
+IDENT: ("_"|"%"|LETTER) ("_"|"%"|"."|LETTER|DIGIT)*
+FUNC: "@" IDENT
+LABEL: "." IDENT
+COMMENT: /#.*/
+
+
+%import common.SIGNED_INT
+%import common.SIGNED_FLOAT
+%import common.WS
+%import common.LETTER
+%import common.DIGIT
+%ignore WS
+%ignore COMMENT

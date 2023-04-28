@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parse 1`] = `
+{
+  "functions": [
+    {
+      "instrs": [
+        {
+          "dest": "a",
+          "op": "const",
+          "type": "int",
+          "value": 47,
+        },
+        {
+          "dest": "b",
+          "op": "const",
+          "type": "int",
+          "value": 42,
+        },
+        {
+          "dest": "cond",
+          "op": "const",
+          "type": "bool",
+          "value": true,
+        },
+        {
+          "args": [
+            "cond",
+          ],
+          "labels": [
+            "left",
+            "right",
+          ],
+          "op": "br",
+        },
+        {
+          "label": "left",
+        },
+        {
+          "dest": "b",
+          "op": "const",
+          "type": "int",
+          "value": 1,
+        },
+        {
+          "dest": "c",
+          "op": "const",
+          "type": "int",
+          "value": 5,
+        },
+        {
+          "labels": [
+            "end",
+          ],
+          "op": "jmp",
+        },
+        {
+          "label": "right",
+        },
+        {
+          "dest": "a",
+          "op": "const",
+          "type": "int",
+          "value": 2,
+        },
+        {
+          "dest": "c",
+          "op": "const",
+          "type": "int",
+          "value": 10,
+        },
+        {
+          "labels": [
+            "end",
+          ],
+          "op": "jmp",
+        },
+        {
+          "label": "end",
+        },
+        {
+          "args": [
+            "a",
+            "c",
+          ],
+          "dest": "d",
+          "op": "sub",
+          "type": "int",
+        },
+        {
+          "args": [
+            "d",
+          ],
+          "op": "print",
+        },
+      ],
+      "name": "main",
+    },
+  ],
+}
+`;
