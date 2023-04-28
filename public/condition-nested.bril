@@ -1,0 +1,50 @@
+@main {
+  v0: bool = const true;
+  a: bool = id v0;
+  v1: bool = const false;
+  b: bool = id v1;
+  v3: bool = id a;
+  br v3 .then.2 .else.2;
+
+.then.2:
+  v4: int = const 1;
+  print v4;
+  v5: int = const 0;
+  v7: bool = id b;
+  br v7 .then.6 .else.6;
+
+.then.6:
+  v8: int = const 2;
+  print v8;
+  v9: int = const 0;
+  jmp .endif.6;
+
+.else.6:
+  v10: int = const 3;
+  print v10;
+  v11: int = const 0;
+
+.endif.6:
+  jmp .endif.2;
+
+.else.2:
+  v12: int = const 4;
+  print v12;
+  v13: int = const 0;
+  v15: bool = id b;
+  br v15 .then.14 .else.14;
+
+.then.14:
+  v16: int = const 5;
+  print v16;
+  v17: int = const 0;
+  jmp .endif.14;
+
+.else.14:
+  v18: int = const 6;
+  print v18;
+  v19: int = const 0;
+  
+.endif.14:
+.endif.2:
+}
