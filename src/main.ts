@@ -7,9 +7,11 @@ import { buildDot } from "./dot.ts";
 import { parse } from "./parse";
 import { Program } from "./bril";
 import { evalProg } from "./interpreter.ts";
+import { invert } from "./map.ts";
 
 enum Hover {
   dominators,
+  dominatedBy,
   frontiers,
 }
 
@@ -20,6 +22,7 @@ interface State {
   cfgName: string;
   cfg?: CFG;
   dominators: Map<string, Set<string>>;
+  dominatedBy: Map<string, Set<string>>;
   frontiers: Map<string, Set<string>>;
   onHover: Hover;
 }
@@ -31,6 +34,7 @@ const state: State = {
   cfgName: "main",
   cfg: undefined,
   dominators: new Map(),
+  dominatedBy: new Map(),
   frontiers: new Map(),
   onHover: Hover.dominators,
 };
@@ -50,6 +54,7 @@ function compute() {
 
   state.cfg = cfg;
   state.dominators = cfg.computeDominators();
+  state.dominatedBy = invert(state.dominators);
   state.frontiers = cfg.computeDominatorFrontiers();
 }
 
@@ -72,10 +77,12 @@ function render() {
 
 function onHover(blockName: string): Set<string> {
   switch (state.onHover) {
-    case Hover.frontiers:
-      return state.frontiers.get(blockName)!;
     case Hover.dominators:
       return state.dominators.get(blockName)!;
+    case Hover.dominatedBy:
+      return state.dominatedBy.get(blockName)!;
+    case Hover.frontiers:
+      return state.frontiers.get(blockName)!;
   }
 }
 
@@ -144,6 +151,8 @@ function toHover(input: string): Hover {
   switch (input) {
     case "dominators":
       return Hover.dominators;
+    case "dominatedBy":
+      return Hover.dominatedBy;
     case "frontiers":
       return Hover.frontiers;
     default:
