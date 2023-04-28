@@ -112,7 +112,7 @@ sourceSelect.addEventListener(
   async (event) => {
     state.cfgName = "main";
     const fileName = (event.target as HTMLSelectElement).value;
-    const url = `/${fileName}`;
+    const url = `${fileName}`;
     const res = await fetch(url);
     const text = await res.text();
     editor.dispatch({
